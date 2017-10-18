@@ -38,6 +38,7 @@ export default class Editor {
         const textAreaElement = document.getElementById("js-editor") as HTMLTextAreaElement;
         this.editor = CodeMirror.fromTextArea(textAreaElement, {
             lineNumbers: true,
+            lineWrapping: true,
             mode: "markdown"
         });
         this.editor.on("cursorActivity", (cm: any) => {
