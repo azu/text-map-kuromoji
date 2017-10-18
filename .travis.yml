@@ -1,0 +1,14 @@
+sudo: false
+language: node_js
+after_success:
+  - |
+
+        $(npm bin)/set-up-ssh --key "$encrypted_356ebc15d91b_key" \
+                             --iv "$encrypted_356ebc15d91b_iv" \
+                             --path-encrypted-key ".travis/github_deploy_key.enc"
+
+        $(npm bin)/update-branch --commands "yarn run build" \
+                                 --commit-message "Update website [skip ci]" \
+                                 --directory "./build" \
+                                 --distribution-branch "gh-pages" \
+                                 --source-branch "master"

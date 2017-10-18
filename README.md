@@ -8,7 +8,9 @@
 
 ## 使い方
 
-<https://azu.github.io/text-map-kuromoji>を開く
+1. <https://azu.github.io/text-map-kuromoji>を開く
+2. テキストを入力する
+3. 解析結果を見る
 
 ## ライセンス
 
