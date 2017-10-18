@@ -1,9 +1,9 @@
 "use strict";
-const EventEmitter = require("events");
-const ObjectAssign = require("object.assign");
+import { EventEmitter } from "events";
 import Editor from "./editor/editor";
 import Marker from "./marker/marker";
 import Output from "./output/output";
+import { Token } from "./marker/Token";
 
 const editor = new Editor({
     selector: "js-editor",
@@ -16,19 +16,27 @@ const editor = new Editor({
 const marker = new Marker();
 const output = new Output({
     selector: "#js-output",
-    onClickNode(mark) {
+    onClickNode(token: Token) {
         app.setState({
-            selected: mark
+            selected: token
         });
     }
 });
 
+export interface AppState {
+    code?: string;
+    tokens: Array<Token>;
+    selected: any ;
+}
+
 class App extends EventEmitter {
+    private state: AppState;
+
     constructor() {
         super();
         this.state = {
             code: undefined,
-            marks: [],
+            tokens: [],
             selected: undefined
         }
     }
@@ -37,15 +45,15 @@ class App extends EventEmitter {
         return this.state;
     }
 
-    setState(newState) {
+    setState(newState: Partial<AppState>) {
         if (this.state === newState) {
             return;
         }
-        this.state = ObjectAssign({}, this.state, newState);
+        this.state = Object.assign({}, this.state, newState);
         this.emit("CHANGE");
     }
 
-    onChange(handler) {
+    onChange(handler: () => void) {
         this.on("CHANGE", handler);
     }
 
@@ -55,18 +63,18 @@ const app = new App();
 app.onChange(() => {
     const state = app.getState();
     console.info("newState", state);
-    editor.updateMarker(state.marks);
+    editor.updateMarker(state.tokens);
     editor.highlightMark(state.selected);
     output.selectMark(state.selected);
-    output.output(state.marks);
+    output.output(state.tokens);
 });
 
 const updateState = () => {
     const code = editor.getText();
-    marker.createMarks(code).then((tokens) => {
+    marker.createMarks(code).then((tokens: Token[]) => {
         app.setState({
             code,
-            marks: tokens
+            tokens
         });
     });
 };

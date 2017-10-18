@@ -1,9 +1,6 @@
-@import "../node_modules/ress/dist/ress.min.css";
-@import "./**/*.css";
-
 :root {
-    --main-left--width: 50%;
-    --main-right--width: 50%;
+    --main-left--width: 40%;
+    --main-right--width: 60%;
 }
 
 html, body, .main, #js-editor {

@@ -1,62 +1,49 @@
 // LICENSE : MIT
 "use strict";
+import * as  CodeMirror from "codemirror";
+import { Token } from "../marker/Token";
+
+const StructuredSource = require('structured-source');
+
 // dependency css
 require("codemirror/lib/codemirror.css");
 require("codemirror/addon/lint/lint.css");
-const CodeMirror = require("codemirror");
 require("codemirror/addon/mode/overlay.js");
-require("codemirror/mode/javascript/javascript.js");
+require("codemirror/mode/markdown/markdown.js");
 require("codemirror/mode/css/css.js");
 
-const defaultText = `
-// object spread operator example
-export function friends(state = initialState, action) {  
-  switch (action.type) {
-    case types.ADD_FRIEND:
-      return {
-        friendsById: {
-          ...state.friendsById,
-          [newId]: {
-            name: action.name
-          }
-        }
-      }
-    default:
-      return state;
-  }
-}
-// Async/Await
-async function countUp() {
-  await delay(1000);
-}
-// Decorator example
-class MyClass extends Component {
-  state = {isLoading: true}
-  
-  @autobind
-  onChange() {}
-  
-  @autobind
-  handleSubmit() {}
-}
+const defaultText = `こんにちわ。
+私はトムですが、あなたは誰ですか？
+私はトムですが、あなたは誰ですか？
+
 `;
+
 export default class Editor {
-    constructor({selector, selectMark}) {
-        this.editor = undefined;
+    private editor: CodeMirror.EditorFromTextArea;
+    private selector: string;
+    private tokens: Array<Token>;
+    private currentCmMarks: Array<any>;
+    private source: any;
+    private highlightText: any;
+    private selectMark: (arg: any) => void;
+
+    constructor({ selector, selectMark }: { selector: string, selectMark: (arg: any) => void }) {
         this.selector = selector;
-        this.marks = [];
+        this.tokens = [];
         this.currentCmMarks = [];
         this.selectMark = selectMark;
     }
 
     edit() {
-        this.editor = CodeMirror.fromTextArea(document.getElementById("js-editor"), {
+        const textAreaElement = document.getElementById("js-editor") as HTMLTextAreaElement;
+        this.editor = CodeMirror.fromTextArea(textAreaElement, {
             lineNumbers: true,
-            mode: "javascript"
+            mode: "markdown"
         });
-        this.editor.on("cursorActivity", (cm) => {
+        this.editor.on("cursorActivity", (cm: any) => {
             const pos = cm.getCursor();
             const cmMarks = cm.findMarksAt(pos);
+            console.log(cmMarks);
             if (cmMarks.length === 0) {
                 return;
             }
@@ -69,7 +56,7 @@ export default class Editor {
         return this;
     }
 
-    getMarkWithCmMark(cmMark) {
+    getMarkWithCmMark(cmMark: any) {
         const matchCmMarks = this.currentCmMarks.filter(targetMark => {
             return targetMark.id === cmMark.id;
         });
@@ -77,43 +64,55 @@ export default class Editor {
             return;
         }
         const matchCmMark = matchCmMarks[0];
-        return this.marks[this.currentCmMarks.indexOf(matchCmMark)];
+        return this.tokens[this.currentCmMarks.indexOf(matchCmMark)];
     }
 
     /**
      * @returns {string}
      */
-    getText() {
+    getText(): string {
         return this.editor.getValue();
     }
 
-    updateMarker(marks) {
-        this.marks = marks;
+    getLocFromToken(token: Token): { start: { line: number, column: number }, end: { line: number, column: number } } {
+        const startIndex = token.word_position - 1;
+        const endIndex = startIndex + token.surface_form.length;
+        const start = this.source.indexToPosition(startIndex);
+        const end = this.source.indexToPosition(endIndex);
+        return {
+            start,
+            end
+        }
+    }
+
+    updateMarker(tokens: Array<Token>) {
+        this.tokens = tokens;
         this.clearMarkers();
-        this.currentCmMarks = marks.map(mark => {
-            const node = mark.node;
-            const loc = node.loc;
-            return this.editor.markText(
-                {line: loc.start.line - 1, ch: loc.start.column},
-                {line: loc.end.line - 1, ch: loc.end.column}
+        this.source = new StructuredSource(this.getText());
+        this.currentCmMarks = tokens.map(token => {
+            const { start, end } = this.getLocFromToken(token);
+            console.log(start, end);
+            return (this.editor as any).markText(
+                { line: start.line - 1, ch: start.column },
+                { line: end.line - 1, ch: end.column }
             );
         })
     }
 
-    highlightMark(mark) {
-        if (!mark) {
+    highlightMark(token: Token) {
+        if (!token) {
             return;
         }
-        const node = mark.node;
-        const loc = node.loc;
-        if (this.highlighText) {
-            this.highlighText.clear();
+        const { start, end } = this.getLocFromToken(token);
+        if (this.highlightText) {
+            this.highlightText.clear();
         }
-        this.highlighText = this.editor.markText(
-            {line: loc.start.line - 1, ch: loc.start.column},
-            {line: loc.end.line - 1, ch: loc.end.column},
+        console.log({ start, end });
+        this.highlightText = (this.editor as any).markText(
+            { line: start.line - 1, ch: start.column },
+            { line: end.line - 1, ch: end.column },
             {
-                title: mark.en.name,
+                title: token.surface_form,
                 className: "highlight",
             }
         );
@@ -125,7 +124,7 @@ export default class Editor {
         });
     }
 
-    onChange(changeHandler) {
+    onChange(changeHandler: () => void) {
         this.editor.on("change", changeHandler);
     }
 }

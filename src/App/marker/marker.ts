@@ -1,8 +1,14 @@
 // LICENSE : MIT
 "use strict";
-const kuromojin = require("kuromojin");
+import { Token } from "./Token";
+
+const getTokenizer = require("kuromojin").getTokenizer;
 export default class Marker {
-    createMarks(code) {
-        return kuromojin.tokenize(code);
+    createMarks(code: string): Promise<Token[]> {
+        return getTokenizer({
+            dicPath: process.env.PUBLIC_URL + "/dict"
+        }).then((tokenizer: any) => {
+            return tokenizer.tokenize(code);
+        });
     }
 }

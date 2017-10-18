@@ -12,6 +12,580 @@
     padding-left: 1rem;
 }
 
-.output-versionTitle {
-    margin: 1rem 0;
+/* table */
+/* markdown */
+
+.output {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    line-height: 1.5;
+    color: #24292e;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.output a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+.output a:active,
+.output a:hover {
+    outline-width: 0;
+}
+
+.output strong {
+    font-weight: inherit;
+}
+
+.output strong {
+    font-weight: bolder;
+}
+
+.output h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+.output img {
+    border-style: none;
+}
+
+.output svg:not(:root) {
+    overflow: hidden;
+}
+
+.output code,
+.output kbd,
+.output pre {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+
+.output hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+}
+
+.output input {
+    font: inherit;
+    margin: 0;
+}
+
+.output input {
+    overflow: visible;
+}
+
+.output [type="checkbox"] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.output * {
+    box-sizing: border-box;
+}
+
+.output input {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.output a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+.output a:hover {
+    text-decoration: underline;
+}
+
+.output strong {
+    font-weight: 600;
+}
+
+.output hr {
+    height: 0;
+    margin: 15px 0;
+    overflow: hidden;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #dfe2e5;
+}
+
+.output hr::before {
+    display: table;
+    content: "";
+}
+
+.output hr::after {
+    display: table;
+    clear: both;
+    content: "";
+}
+
+.output table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.output td,
+.output th {
+    padding: 0;
+}
+
+.output h1,
+.output h2,
+.output h3,
+.output h4,
+.output h5,
+.output h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.output h1 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.output h2 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.output h3 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.output h4 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.output h5 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.output h6 {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.output p {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.output blockquote {
+    margin: 0;
+}
+
+.output ul,
+.output ol {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.output ol ol,
+.output ul ol {
+    list-style-type: lower-roman;
+}
+
+.output ul ul ol,
+.output ul ol ol,
+.output ol ul ol,
+.output ol ol ol {
+    list-style-type: lower-alpha;
+}
+
+.output dd {
+    margin-left: 0;
+}
+
+.output code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 12px;
+}
+
+.output pre {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 12px;
+}
+
+.output .octicon {
+    vertical-align: text-bottom;
+}
+
+.output .pl-0 {
+    padding-left: 0 !important;
+}
+
+.output .pl-1 {
+    padding-left: 4px !important;
+}
+
+.output .pl-2 {
+    padding-left: 8px !important;
+}
+
+.output .pl-3 {
+    padding-left: 16px !important;
+}
+
+.output .pl-4 {
+    padding-left: 24px !important;
+}
+
+.output .pl-5 {
+    padding-left: 32px !important;
+}
+
+.output .pl-6 {
+    padding-left: 40px !important;
+}
+
+.output::before {
+    display: table;
+    content: "";
+}
+
+.output::after {
+    display: table;
+    clear: both;
+    content: "";
+}
+
+.output > *:first-child {
+    margin-top: 0 !important;
+}
+
+.output > *:last-child {
+    margin-bottom: 0 !important;
+}
+
+.output a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+}
+
+.output .anchor {
+    float: left;
+    padding-right: 4px;
+    margin-left: -20px;
+    line-height: 1;
+}
+
+.output .anchor:focus {
+    outline: none;
+}
+
+.output p,
+.output blockquote,
+.output ul,
+.output ol,
+.output dl,
+.output table,
+.output pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.output hr {
+    height: 0.25em;
+    padding: 0;
+    margin: 24px 0;
+    background-color: #e1e4e8;
+    border: 0;
+}
+
+.output blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+}
+
+.output blockquote > :first-child {
+    margin-top: 0;
+}
+
+.output blockquote > :last-child {
+    margin-bottom: 0;
+}
+
+.output kbd {
+    display: inline-block;
+    padding: 3px 5px;
+    font-size: 11px;
+    line-height: 10px;
+    color: #444d56;
+    vertical-align: middle;
+    background-color: #fafbfc;
+    border: solid 1px #c6cbd1;
+    border-bottom-color: #959da5;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #959da5;
+}
+
+.output h1,
+.output h2,
+.output h3,
+.output h4,
+.output h5,
+.output h6 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.output h1 .octicon-link,
+.output h2 .octicon-link,
+.output h3 .octicon-link,
+.output h4 .octicon-link,
+.output h5 .octicon-link,
+.output h6 .octicon-link {
+    color: #1b1f23;
+    vertical-align: middle;
+    visibility: hidden;
+}
+
+.output h1:hover .anchor,
+.output h2:hover .anchor,
+.output h3:hover .anchor,
+.output h4:hover .anchor,
+.output h5:hover .anchor,
+.output h6:hover .anchor {
+    text-decoration: none;
+}
+
+.output h1:hover .anchor .octicon-link,
+.output h2:hover .anchor .octicon-link,
+.output h3:hover .anchor .octicon-link,
+.output h4:hover .anchor .octicon-link,
+.output h5:hover .anchor .octicon-link,
+.output h6:hover .anchor .octicon-link {
+    visibility: visible;
+}
+
+.output h1 {
+    padding-bottom: 0.3em;
+    font-size: 2em;
+    border-bottom: 1px solid #eaecef;
+}
+
+.output h2 {
+    padding-bottom: 0.3em;
+    font-size: 1.5em;
+    border-bottom: 1px solid #eaecef;
+}
+
+.output h3 {
+    font-size: 1.25em;
+}
+
+.output h4 {
+    font-size: 1em;
+}
+
+.output h5 {
+    font-size: 0.875em;
+}
+
+.output h6 {
+    font-size: 0.85em;
+    color: #6a737d;
+}
+
+.output ul,
+.output ol {
+    padding-left: 2em;
+}
+
+.output ul ul,
+.output ul ol,
+.output ol ol,
+.output ol ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.output li > p {
+    margin-top: 16px;
+}
+
+.output li + li {
+    margin-top: 0.25em;
+}
+
+.output dl {
+    padding: 0;
+}
+
+.output dl dt {
+    padding: 0;
+    margin-top: 16px;
+    font-size: 1em;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.output dl dd {
+    padding: 0 16px;
+    margin-bottom: 16px;
+}
+
+.output table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+}
+
+.output table th {
+    font-weight: 600;
+}
+
+.output table th,
+.output table td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+}
+
+.output table tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+}
+
+.output table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
+
+.output img {
+    max-width: 100%;
+    box-sizing: content-box;
+    background-color: #fff;
+}
+
+.output img[align=right] {
+    padding-left: 20px;
+}
+
+.output img[align=left] {
+    padding-right: 20px;
+}
+
+.output code {
+    padding: 0;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(27, 31, 35, 0.05);
+    border-radius: 3px;
+}
+
+.output code::before,
+.output code::after {
+    letter-spacing: -0.2em;
+    content: "\00a0";
+}
+
+.output pre {
+    word-wrap: normal;
+}
+
+.output pre > code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+}
+
+.output .highlight {
+    margin-bottom: 16px;
+}
+
+.output .highlight pre {
+    margin-bottom: 0;
+    word-break: normal;
+}
+
+.output .highlight pre,
+.output pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+}
+
+.output pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+}
+
+.output pre code::before,
+.output pre code::after {
+    content: normal;
+}
+
+.output .full-commit .btn-outline:not(:disabled):hover {
+    color: #005cc5;
+    border-color: #005cc5;
+}
+
+.output kbd {
+    display: inline-block;
+    padding: 3px 5px;
+    font: 11px "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    line-height: 10px;
+    color: #444d56;
+    vertical-align: middle;
+    background-color: #fafbfc;
+    border: solid 1px #d1d5da;
+    border-bottom-color: #c6cbd1;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #c6cbd1;
+}
+
+.output :checked + .radio-label {
+    position: relative;
+    z-index: 1;
+    border-color: #0366d6;
+}
+
+.output .task-list-item {
+    list-style-type: none;
+}
+
+.output .task-list-item + .task-list-item {
+    margin-top: 3px;
+}
+
+.output .task-list-item input {
+    margin: 0 0.2em 0.25em -1.6em;
+    vertical-align: middle;
+}
+
+.output hr {
+    border-bottom-color: #eee;
 }
