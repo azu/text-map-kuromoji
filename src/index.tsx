@@ -1,3 +1,4 @@
+import { run } from "./App/index";
 import registerServiceWorker from './registerServiceWorker';
 
 // require all css files
@@ -8,4 +9,4 @@ function requireAll(r: any) {
 requireAll((require as any).context("./", true, /\.css$/));
 registerServiceWorker();
 
-require("./App/index");
+run();

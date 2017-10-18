@@ -12,11 +12,11 @@ require("codemirror/addon/mode/overlay.js");
 require("codemirror/mode/markdown/markdown.js");
 require("codemirror/mode/css/css.js");
 
-const defaultText = `こんにちわ。
-私はトムですが、あなたは誰ですか？
-私はトムですが、あなたは誰ですか？
+const defaultText = `最初に辞書を読み込むためロード時間がかかります。
 
-`;
+テキストを形態素解析した結果を右側のテーブルに表示します。
+
+テキストを選択するとそのTokenの詳細情報を表示します。`;
 
 export default class Editor {
     private editor: CodeMirror.EditorFromTextArea;

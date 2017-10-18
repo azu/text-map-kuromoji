@@ -5,24 +5,6 @@ import Marker from "./marker/marker";
 import Output from "./output/output";
 import { Token } from "./marker/Token";
 
-const editor = new Editor({
-    selector: "js-editor",
-    selectMark(mark) {
-        app.setState({
-            selected: mark
-        });
-    }
-});
-const marker = new Marker();
-const output = new Output({
-    selector: "#js-output",
-    onClickNode(token: Token) {
-        app.setState({
-            selected: token
-        });
-    }
-});
-
 export interface AppState {
     code?: string;
     tokens: Array<Token>;
@@ -59,24 +41,45 @@ class App extends EventEmitter {
 
 }
 
-const app = new App();
-app.onChange(() => {
-    const state = app.getState();
-    console.info("newState", state);
-    editor.updateMarker(state.tokens);
-    editor.highlightMark(state.selected);
-    output.selectMark(state.selected);
-    output.output(state.tokens);
-});
+export function run() {
 
-const updateState = () => {
-    const code = editor.getText();
-    marker.createMarks(code).then((tokens: Token[]) => {
-        app.setState({
-            code,
-            tokens
-        });
+    const editor = new Editor({
+        selector: "js-editor",
+        selectMark(mark) {
+            app.setState({
+                selected: mark
+            });
+        }
     });
-};
-editor.edit().onChange(updateState);
-updateState();
+    const marker = new Marker();
+    const output = new Output({
+        selector: "#js-output",
+        onClickNode(token: Token) {
+            app.setState({
+                selected: token
+            });
+        }
+    });
+
+    const app = new App();
+    app.onChange(() => {
+        const state = app.getState();
+        console.info("newState", state);
+        editor.updateMarker(state.tokens);
+        editor.highlightMark(state.selected);
+        output.selectMark(state.selected);
+        output.output(state.tokens);
+    });
+
+    const updateState = () => {
+        const code = editor.getText();
+        marker.createMarks(code).then((tokens: Token[]) => {
+            app.setState({
+                code,
+                tokens
+            });
+        });
+    };
+    editor.edit().onChange(updateState);
+    updateState();
+}
